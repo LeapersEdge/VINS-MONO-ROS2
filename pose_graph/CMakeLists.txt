@@ -17,6 +17,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(camera_model REQUIRED)
 find_package(image_transport REQUIRED)
+find_package(ament_index_cpp REQUIRED)
 
 find_package(OpenCV 4 REQUIRED)
 
@@ -26,7 +27,11 @@ find_package(Ceres REQUIRED)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
-include_directories(${EIGEN3_INCLUDE_DIR})
+include_directories(
+    ${EIGEN3_INCLUDE_DIR}
+    ${OpenCV_INCLUDE_DIRS}
+    ${cv_bridge_INCLUDE_DIRS}
+)
 
 
 add_executable(pose_graph
@@ -45,7 +50,7 @@ add_executable(pose_graph
     src/ThirdParty/VocabularyBinary.cpp
     )
 
-ament_target_dependencies(pose_graph rclcpp rcpputils std_msgs sensor_msgs visualization_msgs geometry_msgs nav_msgs tf2 tf2_ros cv_bridge camera_model image_transport)
+ament_target_dependencies(pose_graph rclcpp rcpputils std_msgs sensor_msgs visualization_msgs geometry_msgs nav_msgs tf2 tf2_ros cv_bridge camera_model image_transport ament_index_cpp)
 
 target_link_libraries(pose_graph ${OpenCV_LIBS} ${CERES_LIBRARIES}) 
 

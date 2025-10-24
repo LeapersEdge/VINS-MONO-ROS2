@@ -24,6 +24,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
 include_directories(
   ${EIGEN3_INCLUDE_DIR}
+  ${OpenCV_INCLUDE_DIRS}
+  ${cv_bridge_INCLUDE_DIRS}
 )
 
 add_executable(feature_tracker
@@ -33,7 +35,10 @@ add_executable(feature_tracker
     )
 
 ament_target_dependencies(feature_tracker rclcpp rcpputils std_msgs sensor_msgs geometry_msgs cv_bridge camera_model image_transport)
-target_link_libraries(feature_tracker ${OpenCV_LIBS})
+target_link_libraries(feature_tracker 
+    ${OpenCV_LIBS}
+    ${cv_bridge_LIBRARIES}
+)
 
 # Install nodes
 install(

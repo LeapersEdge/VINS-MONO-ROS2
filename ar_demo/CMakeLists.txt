@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(ar_demo)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_STANDARD 14)
@@ -25,13 +26,19 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
 include_directories(
   ${EIGEN3_INCLUDE_DIR}
+  ${OpenCV_INCLUDE_DIRS}
+  ${cv_bridge_INCLUDE_DIRS}
 )
 
 add_executable(ar_demo_node src/ar_demo_node.cpp)
 
 ament_target_dependencies(ar_demo_node rclcpp rcpputils std_msgs sensor_msgs geometry_msgs visualization_msgs nav_msgs cv_bridge camera_model image_transport)
 
-target_link_libraries(ar_demo_node ${OpenCV_LIBS}) 
+target_link_libraries(ar_demo_node 
+    ${OpenCV_LIBS}
+    ${cv_bridge_LIBRARIES}
+    ${camera_model_LIBRARIES}
+)
 
 # Install nodes
 install(
