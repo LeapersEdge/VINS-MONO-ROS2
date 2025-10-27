@@ -16,8 +16,8 @@ This repository implements the ROS2 version of VINS-MONO, mainly including the f
 ![mh02](https://github.com/dongbo19/VINS-MONO-ROS2/blob/main/config_pkg/config/gif/vins_ros2_mh02.gif)
 # 2. Prerequisites
 * System  
-  * Ubuntu 20.04  
-  * ROS2 foxy
+  * Ubuntu 24.04  
+  * ROS2 Jazzy
 * Libraries
   * OpenCV 4.2.0
   * [Ceres Solver](http://ceres-solver.org/installation.html) 1.14.0
